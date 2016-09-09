@@ -1,0 +1,58 @@
+import android.graphics.Matrix;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+
+public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener{
+    private SeekBar sb_one,sb_two,sb_three;
+    private ImageView img;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        sb_one= (SeekBar) findViewById(R.id.sb_one);
+        sb_two= (SeekBar) findViewById(R.id.sb_two);
+        sb_three= (SeekBar) findViewById(R.id.sb_three);
+        img= (ImageView) findViewById(R.id.img);
+        sb_one.setOnSeekBarChangeListener(this);
+        sb_two.setOnSeekBarChangeListener(this);
+        sb_three.setOnSeekBarChangeListener(this);
+
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        if(seekBar.getId()==sb_one.getId()){
+
+            img.setImageAlpha(255-sb_one.getProgress());
+
+
+        }
+        else if(seekBar.getId()==sb_two.getId()){
+
+            img.setRotation(i);
+            img.setRotationX(i);
+            img.setRotationY(i);
+        }
+        else if(seekBar.getId()==sb_three.getId()){
+            img.setScaleX((float) i/seekBar.getMax());
+            img.setScaleY((float) i/seekBar.getMax());
+        }
+
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+}
